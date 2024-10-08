@@ -8,3 +8,7 @@ Monitoreo
 AWS
 scripting
 Github actions
+
+Tendencias
+
+IA
