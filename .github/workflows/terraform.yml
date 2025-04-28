@@ -1,26 +1,29 @@
-name: Terraform Apply para crear repositorio
+name: Ejecutar Terraform
 
-on:
-  workflow_dispatch:  # Para ejecutarlo manualmente
+on: [push]
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout del código
-      uses: actions/checkout@v4
+      - name: Checkout del código
+        uses: actions/checkout@v4
 
-    - name: Instalar Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.7.5
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
 
-    - name: Inicializar Terraform
-      run: terraform init
+      - name: Inicializar Terraform
+        working-directory: Terraform
+        run: terraform init
 
-    - name: Aplicar Terraform
-      env:
-        TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN_TF }}
-        TF_VAR_github_owner: Gaston2018
-      run: terraform apply -auto-approve
+      - name: Validar Terraform
+        working-directory: Terraform
+        run: terraform validate
+
+      - name: Aplicar Terraform
+        working-directory: Terraform
+        env:
+          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_github_owner: Gaston2018
+        run: terraform apply -auto-approve
