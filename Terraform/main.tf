@@ -12,6 +12,10 @@ provider "github" {
   owner = var.github_owner
 }
 
+variable "github_token" {
+  type = string
+}
+
 resource "github_repository" "nuevo_repositorio" {
   name        = "mi-repo-desde-terraform"
   description = "Repositorio creado automáticamente con Terraform"
