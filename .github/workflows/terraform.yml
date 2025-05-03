@@ -24,6 +24,6 @@ jobs:
       - name: Aplicar Terraform
         working-directory: Terraform
         env:
-          TF_VAR_github_token: ${{ secrets.PAT_GASTON }}
+          TF_VAR_github_token: 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
           TF_VAR_github_owner: Gaston2018
         run: terraform apply -auto-approve
